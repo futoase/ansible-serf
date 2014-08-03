@@ -1,0 +1,22 @@
+---
+- name: download of serf from official site.
+  get_url: url=https://dl.bintray.com/mitchellh/serf/{{ serf_package.for_linux }}
+           dest=/tmp/{{ serf_package.for_linux }}
+
+- name: mkdir of serf
+  file: state=directory
+        path=/usr/local/serf/bin
+        owner=root
+        group=root
+        mode=0755
+
+- name: unarchive of serf
+  unarchive: src=/tmp/{{serf_package.for_linux }}
+             dest=/usr/local/serf/bin copy=no
+
+- name: setup of serf.sh to profile.d
+  copy: src=serf.sh
+        dest=/etc/profile.d/serf.sh
+        owner=root
+        group=root
+        mode=0644

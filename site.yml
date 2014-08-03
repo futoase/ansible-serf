@@ -1,0 +1,8 @@
+---
+- hosts: all
+  sudo: yes
+  vars_files:
+    - 'vars/serf.yml'
+  roles:
+    - base
+    - serf
